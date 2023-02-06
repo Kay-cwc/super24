@@ -23,7 +23,7 @@ export default function Home() {
   
   useEffect(() => {
     updateCards();
-  }, [refreshCount, updateCards])
+  }, [refreshCount])
   
   return (
     <>
