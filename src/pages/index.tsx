@@ -3,7 +3,8 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { genRound } from '@/lib/genRounds'
 import Card from '@/components/card/card'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { findSolution } from '@/lib/findSolution'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,12 +19,21 @@ export default function Home() {
   const updateCards = () => {
     const round = genRound();
     setCardsVal(round);
-
   }
+
+  const findPossibleSolutions = useCallback(() => {
+    const solutions = findSolution(cardsVal);
+
+    console.log(solutions);
+  }, [cardsVal])
   
   useEffect(() => {
     updateCards();
   }, [refreshCount])
+
+  useEffect(() => {
+    findPossibleSolutions()
+  }, [cardsVal])
   
   return (
     <>
