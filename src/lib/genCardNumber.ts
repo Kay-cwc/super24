@@ -1,4 +1,4 @@
 
-export const useCardNumber = () => {
+export const genCardNumber = () => {
     return Math.round(Math.random() * 13);
 }

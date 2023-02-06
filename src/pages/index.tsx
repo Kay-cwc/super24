@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-import { useRound } from '@/hooks/useRound'
+import { genRound } from '@/lib/genRounds'
 import Card from '@/components/card/card'
 import { useEffect, useState } from 'react'
 
@@ -16,7 +16,7 @@ export default function Home() {
   }
 
   const updateCards = () => {
-    const round = useRound();
+    const round = genRound();
     setCardsVal(round);
 
   }
