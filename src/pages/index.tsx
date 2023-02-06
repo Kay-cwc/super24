@@ -11,6 +11,8 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [cardsVal, setCardsVal] = useState([0,0,0,0]);
   const [refreshCount, setRefreshCount] = useState(0);
+  const [solution, setSolution] = useState<string[]>([]);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const nextRound = () => {
     setRefreshCount(refreshCount + 1);
@@ -21,13 +23,21 @@ export default function Home() {
     setCardsVal(round);
   }
 
-  const findPossibleSolutions = useCallback(() => {
-    const solutions = findSolution(cardsVal);
+  const findPossibleSolutions = () => {
+    const _solution = findSolution(cardsVal);
+    if (_solution != undefined) {
+      setSolution(_solution);
+    } else {
+      setSolution([]);
+    }
+  };
 
-    console.log(solutions);
-  }, [cardsVal])
+  const clickShowAnswer = () => {
+    setShowAnswer(true);
+  }
   
   useEffect(() => {
+    setShowAnswer(false)
     updateCards();
   }, [refreshCount])
 
@@ -46,6 +56,20 @@ export default function Home() {
       <main className={styles.main}>
         <div style={{ display: 'flex' }}>
           {cardsVal.map((c, id) => <Card key={`card-${id}`} value={c} />)}
+        </div>
+        <div>
+          <div style={{ height: 70, textAlign: 'center' }}>
+            {showAnswer && <div>{solution.length > 0 ? solution.join(' ') : 'i give up'}</div>}
+          </div>
+          <button 
+            style={{
+              padding: 12,
+              fontSize: 30,
+            }}  
+            onClick={clickShowAnswer}
+          >
+            show answer
+          </button>
         </div>
         <div>
           <button
