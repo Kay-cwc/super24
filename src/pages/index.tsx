@@ -14,12 +14,16 @@ export default function Home() {
   const nextRound = () => {
     setRefreshCount(refreshCount + 1);
   }
+
+  const updateCards = () => {
+    const round = useRound();
+    setCardsVal(round);
+
+  }
   
   useEffect(() => {
-    const round = useRound();
-    
-    setCardsVal(round);
-  }, [refreshCount])
+    updateCards();
+  }, [refreshCount, updateCards])
   
   return (
     <>
@@ -31,7 +35,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div style={{ display: 'flex' }}>
-          {cardsVal.map((c) => <Card value={c} />)}
+          {cardsVal.map((c, id) => <Card key={`card-${id}`} value={c} />)}
         </div>
         <div>
           <button
