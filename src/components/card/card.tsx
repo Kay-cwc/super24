@@ -9,6 +9,9 @@ export default function Card({value}:  CardProps) {
 
     useEffect(() => {
         switch(value) {
+            case 1:
+                setFace('A');
+                break
             case 11:
                 setFace('J');
                 break
