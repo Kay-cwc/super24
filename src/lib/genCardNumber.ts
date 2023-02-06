@@ -1,4 +1,4 @@
 
 export const genCardNumber = () => {
-    return Math.round(Math.random() * 13);
+    return Math.round(Math.random() * 12) + 1; 
 }
